@@ -20,8 +20,8 @@ serviceName : Ident;
 rpcName : Ident;
 streamName : Ident;
 messageType : '.'? (Ident '.')* messageName;
-enumType : '.'? (Ident '.') enumName;
-groupName : CapitalLetter (Letter | DecimalDigit);
+enumType : '.'? (Ident '.')* enumName;
+groupName : CapitalLetter (Letter | DecimalDigit)*;
 
 // Integer literals;
 
@@ -145,9 +145,9 @@ fieldNames : fieldName (',' fieldName);
 //
 //The enumDef definition consists of a name and an enumDef body. The enumDef body can have options and enumDef fields.;
 
-enumDef : 'enumDef' enumName enumBody;
-enumBody : '{' (option | enumField | emptyStatement) '}';
-enumField : Ident '=' IntLit ('[' enumValueOption (','  enumValueOption) ']') ';';
+enumDef : 'enum' enumName enumBody;
+enumBody : '{' (option | enumField | emptyStatement)* '}';
+enumField : Ident '=' IntLit ('[' enumValueOption (','  enumValueOption) ']')? ';';
 enumValueOption : optionName '=' constant;
 
 //Message definition;
